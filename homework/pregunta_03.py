@@ -15,3 +15,15 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+    acumulador = {}
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for linea in file:
+            columnas = linea.strip().split("\t")
+            letra = columnas[0]
+            valor = int(columnas[1])
+            acumulador[letra] = acumulador.get(letra, 0) + valor
+
+    resultado = sorted(acumulador.items())
+
+    return resultado

@@ -26,3 +26,22 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    min_max_por_clave = {}
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            columnas = linea.strip().split("\t")
+            if len(columnas) < 5:
+                continue
+            pares = columnas[4].split(",")
+            for par in pares:
+                clave, valor = par.split(":")
+                valor = int(valor)
+                if clave not in min_max_por_clave:
+                    min_max_por_clave[clave] = [valor, valor]
+                else:
+                    min_max_por_clave[clave][0] = min(min_max_por_clave[clave][0], valor)
+                    min_max_por_clave[clave][1] = max(min_max_por_clave[clave][1], valor)
+
+    resultado = [(clave, vmin, vmax) for clave, (vmin, vmax) in sorted(min_max_por_clave.items())]
+    return resultado

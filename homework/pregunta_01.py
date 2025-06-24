@@ -14,3 +14,14 @@ def pregunta_01():
     214
 
     """
+    suma = 0
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for linea in file:
+            columnas = linea.strip().split("\t")
+
+            if len(columnas) >= 2:
+                try:
+                    suma += float(columnas[1])
+                except ValueError:
+                    pass
+    return suma
